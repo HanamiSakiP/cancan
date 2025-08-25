@@ -213,7 +213,7 @@ import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
 const openMsg = () => {
 	ElMessage({
 		type: 'success', // success | warning | info | error
-		message: 'dengruicode.com',
+		message: 'https://live.bilibili.com/22603245',
 		showClose: true
 	})
 }
@@ -235,7 +235,7 @@ const openConfirm = () => {
 const openNotify = () => {
 	ElNotification({
 		title: '标题',
-		message: '邓瑞编程',
+		message: '塔菲编程',
 		duration: 1500 // 展示时间 [单位:毫秒]
 	})
 }
@@ -245,7 +245,7 @@ const openNotify2 = () => {
 	ElNotification({
 		type: 'success', // success | warning | info | error
 		title: '标题',
-		message: 'dengruicode.com',
+		message: 'https://live.bilibili.com/22603245',
 		duration: 1500,
 		position: 'bottom-right'
 	})
@@ -290,7 +290,7 @@ const userCommand = (command) => { //点击菜单触发的回调
 
 	<h3>水平导航</h3>
 	<el-menu mode="horizontal" :default-active="selectedIndex" @select="selected">
-		<el-menu-item index="1">邓瑞编程</el-menu-item>
+		<el-menu-item index="1">塔菲编程</el-menu-item>
 		<el-sub-menu index="2">
 			<template #title>我的工作台</template>
 			<el-menu-item index="2-1">选项1</el-menu-item>
@@ -305,7 +305,7 @@ const userCommand = (command) => { //点击菜单触发的回调
 	<h3>水平导航-自定义样式</h3>
 	<el-menu mode="horizontal" :default-active="selectedIndex" @select="selected" background-color="#545c64"
 		text-color="#fff" active-text-color="#ffd04b" style="height: 40px; width: 600px;">
-		<el-menu-item index="1">邓瑞编程</el-menu-item>
+		<el-menu-item index="1">塔菲编程</el-menu-item>
 		<el-sub-menu index="2">
 			<template #title>我的工作台</template>
 			<el-menu-item index="2-1">选项1</el-menu-item>
@@ -394,8 +394,8 @@ const userCommand = (command) => { //点击菜单触发的回调
 	<h3>面包屑</h3>
 	<el-breadcrumb separator="/">
 		<el-breadcrumb-item><a href="#">首页</a></el-breadcrumb-item>
-		<el-breadcrumb-item>邓瑞编程</el-breadcrumb-item>
-		<el-breadcrumb-item>dengruicode.com</el-breadcrumb-item>
+		<el-breadcrumb-item>塔菲编程</el-breadcrumb-item>
+		<el-breadcrumb-item>https://live.bilibili.com/22603245</el-breadcrumb-item>
 	</el-breadcrumb>
 
 	<h3>下拉菜单</h3><br>
@@ -431,9 +431,9 @@ const tabClick = (tab, event) => {
 
 const tab = reactive({
 	arr: [
-		{ name: "1", title: '邓瑞', content: '内容1' },
-		{ name: "2", title: '邓瑞编程', content: '内容2' },
-		{ name: "3", title: 'dengruicode.com', content: '内容3' },
+		{ name: "1", title: '塔菲', content: '内容1' },
+		{ name: "2", title: '塔菲编程', content: '内容2' },
+		{ name: "3", title: 'https://live.bilibili.com/22603245', content: '内容3' },
 	]
 })
 
@@ -465,23 +465,23 @@ const tabRemove = (name) => {
 <template>
 	<h3>标签页</h3>
 	<el-tabs v-model="selectedName" @tab-click="tabClick">
-		<el-tab-pane label="邓瑞" name="1">内容1</el-tab-pane>
-		<el-tab-pane label="邓瑞编程" name="2">内容2</el-tab-pane>
-		<el-tab-pane label="dengruicode.com" name="3">内容3</el-tab-pane>
+		<el-tab-pane label="塔菲" name="1">内容1</el-tab-pane>
+		<el-tab-pane label="塔菲编程" name="2">内容2</el-tab-pane>
+		<el-tab-pane label="https://live.bilibili.com/22603245" name="3">内容3</el-tab-pane>
 	</el-tabs>
 
 	<h3>卡片风格</h3>
 	<el-tabs v-model="selectedName" @tab-click="tabClick" type="card">
-		<el-tab-pane label="邓瑞" name="a">内容1</el-tab-pane>
-		<el-tab-pane label="邓瑞编程" name="b">内容2</el-tab-pane>
-		<el-tab-pane label="dengruicode.com" name="b">内容3</el-tab-pane>
+		<el-tab-pane label="塔菲" name="a">内容1</el-tab-pane>
+		<el-tab-pane label="塔菲编程" name="b">内容2</el-tab-pane>
+		<el-tab-pane label="https://live.bilibili.com/22603245" name="b">内容3</el-tab-pane>
 	</el-tabs>
 
 	<h3>带有边框的卡片风格</h3>
 	<el-tabs v-model="selectedName" @tab-click="tabClick" type="border-card">
-		<el-tab-pane label="邓瑞" name="A">内容1</el-tab-pane>
-		<el-tab-pane label="邓瑞编程" name="B">内容2</el-tab-pane>
-		<el-tab-pane label="dengruicode.com" name="C">内容3</el-tab-pane>
+		<el-tab-pane label="塔菲" name="A">内容1</el-tab-pane>
+		<el-tab-pane label="塔菲编程" name="B">内容2</el-tab-pane>
+		<el-tab-pane label="https://live.bilibili.com/22603245" name="C">内容3</el-tab-pane>
 	</el-tabs>
 
 	<h3>动态添加</h3>
@@ -505,8 +505,8 @@ import { ref } from 'vue'
 
 const name = ref('')
 const password = ref('')
-const content = ref('邓瑞编程')
-const url = ref('dengruicode.com')
+const content = ref('塔菲编程')
+const url = ref('https://live.bilibili.com/22603245')
 const url2 = ref('dengruicode')
 const email = ref('123456')
 
@@ -952,10 +952,10 @@ import { ref } from 'vue'
 
 const data = ref({
 	arr: [
-		{ id: '1', name: '邓瑞', web: 'dengruicode.com', date: '2023-06-20' },
-		{ id: '2', name: 'David', web: 'www.dengruicode.com', date: '2023-06-21' },
-		{ id: '3', name: 'Luna', web: 'dengruicode.com', date: '2023-06-22' },
-		{ id: '4', name: 'Lisa', web: 'www.dengruicode.com', date: '2023-06-22' }
+		{ id: '1', name: '塔菲', web: 'https://live.bilibili.com/22603245', date: '2023-06-20' },
+		{ id: '2', name: 'David', web: 'https://space.bilibili.com/1265680561', date: '2023-06-21' },
+		{ id: '3', name: 'Luna', web: 'https://live.bilibili.com/22603245', date: '2023-06-22' },
+		{ id: '4', name: 'Lisa', web: 'https://space.bilibili.com/1265680561', date: '2023-06-22' }
 	]
 })
 

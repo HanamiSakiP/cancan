@@ -1,5 +1,3 @@
-首页 - [塔菲](https://live.bilibili.com/22603245)
-
 ## 0. 安装路由
 [Vue Router 官网](https://router.vuejs.org/zh)
 ```bash
