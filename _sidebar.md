@@ -12,6 +12,7 @@
   * [02、vue部署教程](debian/vue.md)
   * [03、vue组件篇](debian/vue-3.md)
   * [04、vue路由篇](debian/vue-4.md)
+  * [05、vue的ElementPlus 组件库](debian/vue-5.md)  
 * 数据库db
   * [01、mysql部署教程](db/MariaDB.md)
 * Android
