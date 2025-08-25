@@ -22,7 +22,22 @@ git commit -m "Initial commit with all files"
 git push -u origin master
 ```
 
-
+后续使用
+```bash
+# 查看当前状态
+git status
+# 添加更改
+# 添加所有更改
+git add .
+# 添加特定文件
+# git add 文件名
+# 提交更改
+git commit -m "描述你的更改"
+# 推送更改到远程仓库
+git push origin master
+# 查看提交历史
+git log
+```
 
 ## 1、新建仓库
 
