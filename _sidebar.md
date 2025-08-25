@@ -9,6 +9,9 @@
   * [05、docker入门配置](docker/docker入门.md)
 * debian工具推荐
   * [01、输入法fcitx5部署教程](debian/fcitx5.md)
+  * [02、vue部署教程](debian/vue.md)
+  * [03、vue组件篇](debian/vue-3.md)
+  * [04、vue路由篇](debian/vue-4.md)
 * 数据库db
   * [01、mysql部署教程](db/MariaDB.md)
 * Android
