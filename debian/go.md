@@ -25,6 +25,16 @@ go clean -modcache && go clean -cache
 ls $GOPATH/bin
 # go run main.go
 go run .
+
+# go-cn(windows)
+go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GO111MODULE=on
+
+# go-cn(Linux)
+# ~/.bashrc                 |                ~/.zshrc
+export GOPROXY=https://goproxy.cn,direct
+export GO111MODULE=on  # 确保开启 Go Modules
+source ~/.bashrc  # 或 source ~/.zshrc
 ```
 
 ## go_tool
@@ -53,10 +63,11 @@ go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
 ```
 
 
-## pip_tool
+## pip_com
 ```bash
 pip list
 pip show pip
+pip install -i 镜像网站  httpie
 ```
 
 
