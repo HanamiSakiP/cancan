@@ -507,7 +507,7 @@ const name = ref('')
 const password = ref('')
 const content = ref('塔菲编程')
 const url = ref('https://live.bilibili.com/22603245')
-const url2 = ref('dengruicode')
+const url2 = ref('tafeicode')
 const email = ref('123456')
 
 //const selected = ref('')
