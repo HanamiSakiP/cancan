@@ -3,6 +3,9 @@
 ```bash
 https://github.com/denisidoro/navi
 https://github.com/tmux/tmux
+https://github.com/voidint/g
+https://github.com/pyenv/pyenv
+https://github.com/nvm-sh/nvm
 ```
 
 web
@@ -27,12 +30,12 @@ ls $GOPATH/bin
 go run .
 
 # go-cn(windows)
-go env -w GOPROXY=https://goproxy.cn,direct
+go env -w GOPROXY=镜像网站,direct
 go env -w GO111MODULE=on
 
 # go-cn(Linux)
 # ~/.bashrc                 |                ~/.zshrc
-export GOPROXY=https://goproxy.cn,direct
+export GOPROXY=镜像网站,direct
 export GO111MODULE=on  # 确保开启 Go Modules
 source ~/.bashrc  # 或 source ~/.zshrc
 ```
@@ -53,6 +56,7 @@ go install github.com/gopasspw/gopass@latest
 go install github.com/LeperGnome/bt/cmd/bt@v1.2.0
 go install github.com/aurc/loggo@latest
 go install github.com/knqyf263/sou@latest
+go install github.com/dhth/omm@latest
 
 
 # test
@@ -60,6 +64,7 @@ go install github.com/xo/usql@latest
 go install github.com/brittonhayes/pillager@latest
 go install github.com/projectdiscovery/katana/cmd/katana@latest
 go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
+env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 ```
 
 
