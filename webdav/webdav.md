@@ -3,6 +3,77 @@
 * https://app.koofr.net/dav/Koofr 官方 WebDAV URL
 * https://app.koofr.net/dav/Dropbox 挂载 Dropbox WebDAV URL
 
+rclone省流
+```bash
+rclone config
+# n , 名字 , 服务
+# 回车,回车,n,y,浏览器登陆,y
+rclone listremotes
+# 测试连通性
+rclone lsd dropbox:
+# 初始化,备份,恢复
+```
+
+初始化交互
+```bash
+rclone config
+```
+列出已配置
+```bash
+rclone listremotes
+```
+列出 remote 根目录
+```bash
+rclone ls remote:bucket/path
+rclone lsd remote:bucket/path      # 只列目录
+rclone lsf remote:bucket/path      # 简洁列表（可用参数定制）
+```
+从本地复制到 remote（保留源文件）
+```bash
+rclone copy /local/path remote:bucket/path
+```
+从 remote 复制到本地
+```bash
+rclone copy remote:bucket/path /local/path
+```
+同步（目标被源完全覆盖 — 会删除目标多余文件）
+```bash
+rclone sync /local/path remote:bucket/path
+```
+增量同步（仅修改或新增文件）通常由 copy 实现；sync 强制镜像
+可加参数：-v（详细），--progress（显示进度），--dry-run（模拟执行），--checksum（使用校验和），--size-only（仅比较大小），--delete-excluded（删除排除项之外的文件）等。
+```bash
+rclone sync /local/photos remote:backup/photos --progress --dry-run
+```
+移动
+```bash
+rclone move /local/path remote:bucket/path
+```
+在 remote 内重命名（实际上是复制+删除）
+```bash
+rclone moveto remote:bucket/oldname remote:bucket/newname
+```
+删除 remote 中的文件或目录
+```bash
+rclone delete remote:bucket/path        # 删除文件
+rclone purge remote:bucket/path         # 删除目录及其内容
+rclone rmdirs remote:bucket/path        # 删除空目录
+```
+比较两端差异（列出不同文件）
+```bash
+rclone check /local/path remote:bucket/path
+rclone md5sum remote:bucket/path > remote_md5.txt   # 生成校验和（视 backend 支持）
+```
+挂载（FUSE，Linux/macOS/Windows with WinFsp）
+常用参数：--vfs-cache-mode full|writes|off，--allow-other（允许其他用户访问），--uid/--gid，--read-only。
+```bash
+rclone mount remote:bucket /mnt/remote --vfs-cache-mode writes
+```
+搜索文件名包含关键字
+```bash
+rclone find remote:bucket/path --name "关键字"
+```
+
 ## git的初体验
 
 ## 0、省流
