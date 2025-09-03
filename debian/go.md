@@ -57,12 +57,14 @@ go install github.com/LeperGnome/bt/cmd/bt@v1.2.0
 go install github.com/aurc/loggo@latest
 go install github.com/knqyf263/sou@latest
 go install github.com/dhth/omm@latest
+go install github.com/neilotoole/sq@latest
+go install github.com/rs/curlie@latest
+go install github.com/xo/usql@latest
+go install github.com/projectdiscovery/katana/cmd/katana@latest
 
 
 # test
-go install github.com/xo/usql@latest
 go install github.com/brittonhayes/pillager@latest
-go install github.com/projectdiscovery/katana/cmd/katana@latest
 go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
 env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/gokcehan/lf@latest
 ```
