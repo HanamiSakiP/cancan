@@ -5,17 +5,46 @@
 # 重要文件
 package.json   // 查看已安装库（bash）
 src/main.js   // 导入注册组件
+src/router/index.js   // 配置路由
 vite.config.js   // 配置路径别名
 jsconfig.json   // 配置@路径提示（没有须自建）
 
 # 一般结构
 node_modules   // 依赖
-src/views   // 主要页面
-src/components   // 公共页面
+src/views   // 主要页面-provide(传入给子组件)
+
+# 匿名插槽
+//      <Header>
+//            <a href="123.com">关注塔菲喵</a>
+//      </Header>
+# 具名插槽(v-slot:url 简写 #url)
+//      <Footer>
+//          <template #url>
+//                <a href="123.com">关注塔菲喵</a>
+//          </template>
+//      </Footer>
+# 作用域插槽
+# 解构
+// <Footer><template #user="{url,title}"></template></Footer>
+
+src/components   // 子组件
+
+// provide(传入给子组件)
+// defineProps/inject(注入父组件/依赖注入)二选一
+// defineEmits(传入给父组件)
+
+# 匿名插槽
+// <slot/>
+# 具名插槽
+// <slot name="url" />
+# 作用域插槽
+// <slot name="user" url="123.com" title="塔菲直播" />
+
 src/router   // 网页路由
 src/assets   // 图标,图片等存储路径
 src/store   // 状态管理
 ```
+
 
 ### 安装和使用vue
 ```bash
@@ -38,7 +67,7 @@ cat > src/App.vue << 'EOF'
 </script>
 
 <template>
-test
+    <router-view />
 </template>
 
 <style scoped>
@@ -100,6 +129,197 @@ app.use(router)
 app.mount('#app')
 ```
 
+
+### 实例src/router/index.js
+```src/router/index.js
+import { createRouter, createWebHashHistory, createWebHistory } from "vue-router"
+
+const routes = [
+    {
+        path: "/", // http://localhost:5173
+        // 定义别名 http://localhost:5173/home
+        alias: ["/home", "/index"], // http://localhost:5173/index
+        component: () => import("@/views/index.vue")
+    },
+    {
+        path: "/content", // 查询字符串传参 http://localhost:5173/content?id=100&title=塔菲编程
+        component: () => import("@/views/content.vue")
+    },
+    {
+        path: "/user/:id/name/:name", // 路径传参 http://localhost:5173/user/007/name/塔菲
+        component: () => import("@/views/user.vue")
+    },
+    {
+        //可选参数 name? 表示该参数不是必需的
+        path: "/userHistory/:id/name/:name?", // http://localhost:5173/userHistory/007/name
+        name: "history", // 定义路由名称
+        component: () => import("@/views/user.vue")
+    },
+    {
+        path: "/svip", // http://localhost:5173/svip
+        //redirect: "/vip" // 重定向
+        redirect: { name: 'history', params: { id: '100', name: 'David' } }
+    },
+    {
+        path: "/vip",
+        component: () => import("@/views/vip.vue"),
+        children: [ // 子路由
+            {
+                path: '', // 默认页 http://localhost:5173/vip
+                component: import("@/views/vip/default.vue")
+            },
+            {
+                path: 'info', // 会员资料 http://localhost:5173/vip/info
+                component: import("@/views/vip/info.vue")
+            }
+        ]
+    }
+]
+
+const router = createRouter({
+    //使用url的#符号之后的部分模拟url路径的变化,因为不会触发页面刷新,所以不需要服务端支持
+    //history: createWebHashHistory(), 
+    history: createWebHistory(),
+    routes
+})
+
+export default router
+```
+
+### 实例views/index.vue
+```views/index.vue
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter()
+
+let userId = 100
+let userName = "塔菲"
+
+const goTo = () => {
+    //router.push("/user/007/name/塔菲")
+    //router.push({ path: '/content', query: { id: 200, title: '塔菲' } })
+    router.push({ name: 'history', params: { id: '300', name: '塔菲编程' } })
+}
+</script>
+
+<template>
+    首页 - dengruicode.com
+    <hr>
+
+    <router-link to="/content?id=100&title=塔菲编程">查询字符串传参</router-link> <br>
+    <router-link to="/user/007/name/塔菲">路径传参</router-link> <br>
+
+    <!-- 动态属性绑定 -->
+    <router-link :to="{ path: '/content', query: { id: 200, title: '塔菲' } }">查询字符串传参 - 动态属性绑定</router-link> <br>
+    <router-link :to="{ path: `/user/${userId}/name/${userName}` }">路径传参 - 动态属性绑定</router-link> <br>
+
+    <!-- 定义路由名称 -->
+    <router-link :to="{ name: 'history', params: { id: '300', name: '塔菲编程' } }">路径传参 - 定义路由名称</router-link> <br>
+
+    <!-- 编程式导航 -->
+    <button @click="goTo()">编程式导航</button>
+</template>
+
+<style scoped></style>
+```
+
+### 实例views/content.vue
+```views/content.vue
+<script setup></script>
+
+<template>
+    内容页<hr>
+    id: {{ $route.query.id }} <br>
+    title: {{ $route.query.title }}
+</template>
+
+<style scoped></style>
+```
+
+### 实例views/user.vue
+```views/user.vue
+<script setup>
+</script>
+
+<template>
+    个人主页<hr>
+    id: {{ $route.params.id }} <br>
+    name: {{ $route.params.name }}
+</template>
+
+<style scoped>
+</style>
+```
+
+### 实例views/vip.vue
+```views/vip.vue
+<script setup>
+//导入子组件
+import Header from "@/components/header.vue"
+import Footer from "@/components/footer.vue"
+</script>
+
+<template>
+    <!-- 共享的Header组件 -->
+    <Header />
+    <!-- 根据不同的子路由加载不同子页面 -->
+    <router-view />
+    <!-- 共享的Footer组件 -->
+    <Footer />
+</template>
+
+<style scoped></style>
+```
+
+### 实例views/vip/default.vue
+```views/vip/default.vue
+<script setup></script>
+
+<template>
+    会员默认页<br>
+</template>
+
+<style scoped></style>
+```
+
+### 实例views/vip/info.vue
+```views/vip/info.vue
+<script setup></script>
+
+<template>
+    会员资料
+</template>
+
+<style scoped></style>
+```
+
+### 实例components/header.vue
+```components/header.vue
+<script setup>
+</script>
+
+<template>
+    Header<br>
+</template>
+
+<style scoped>
+</style>
+```
+
+### 实例components/footer.vue
+```components/footer.vue
+<script setup>
+</script>
+
+<template>
+    Footer<br>
+</template>
+
+<style scoped>
+</style>
+```
+
+
 ### vite.config.js
 ```vite.config.js
 import { defineConfig } from 'vite'
@@ -117,7 +337,7 @@ export default defineConfig({
 })
 ```
 
-### jsconfig.json（没有须自建）
+### 没有须自建jsconfig.json
 ```jsconfig.json
 {
     "compilerOptions": {

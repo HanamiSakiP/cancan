@@ -74,9 +74,9 @@ rclone mount remote:bucket /mnt/remote --vfs-cache-mode writes
 rclone find remote:bucket/path --name "关键字"
 ```
 
-## git的初体验
+## git使用
 
-## 0、省流
+## 0、git省流
 
 
 ```bash
