@@ -51,7 +51,7 @@ source ~/.bashrc  # 或 source ~/.zshrc
 ```bash
 
 go install github.com/junegunn/fzf@latest
-
+go install github.com/rclone/rclone@latest
 go install github.com/maaslalani/nap@main
 go install github.com/charmbracelet/glow@latest
 go install github.com/boyter/scc/v3@latest
