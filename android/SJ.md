@@ -22,7 +22,7 @@ flutter doctor --android-licenses
 flutter doctor
 ```
 
-
+Android Studio安装
 ```bash
 # 解压后
 sudo mv -xzf ~/Downloads/android-studio/ /opt/android-studio-stable
