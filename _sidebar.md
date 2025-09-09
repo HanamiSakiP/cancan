@@ -15,6 +15,7 @@
   * [04、vue路由篇](debian/vue-4.md)
   * [05、vue的ElementPlus 组件库](debian/vue-5.md)  
   * [06、go部署教程](debian/go.md)  
+  * [07、go基础](debian/go-2.md)
 * 数据库db
   * [01、mysql部署教程](db/MariaDB.md)
 * Android
