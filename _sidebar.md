@@ -18,6 +18,8 @@
   * [07、go基础](debian/go-2.md)
 * 数据库db
   * [01、mysql部署教程](db/MariaDB.md)
+* tool
+  * [01、gopass部署教程](tool/tool.md)
 * Android
   * [01、Android部署教程](android/SJ.md)
 * WebDAV
