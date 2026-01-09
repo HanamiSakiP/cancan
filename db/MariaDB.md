@@ -12,10 +12,12 @@ mysql -u root -p
 
 #### tmux后台命令
 ```bash
-tmux new -d -s qd "cd frontend"
-tmux send-keys -t qd "npm run dev"
-tmux new -d -s hd "cd backend"
-tmux send-keys -t hd "go run main.go"
+cd frontend
+tmux new -d -s qd "npm run dev"
+cd ../backend/
+tmux new -d -s hd "go run main.go"
+cd ..
+tmux ls
 ```
 
 #### tmux清空命令
