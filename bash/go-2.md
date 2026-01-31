@@ -1,7 +1,7 @@
 基本配置
 
 ## 0. 基本代码
-test/test.go
+> test/test.go
 ```test.go
 # 导包
 package test
@@ -12,7 +12,7 @@ import (
 ```
 
 ## 1. 基础配置（数据库连接）-gorm
-config/config.go
+> config/config.go
 ```config/config.go
 package config
 
@@ -69,7 +69,7 @@ func InitConfig() {
 }
 ```
 
-config/config.yml
+> config/config.yml
 ```config/config.yml
 app:
   name: test
@@ -86,7 +86,7 @@ redis:
   Password: ""
 ```
 
-config/db.go
+> config/db.go
 ```config/db.go
 package config
 
@@ -129,7 +129,7 @@ func initDB(){
 }
 ```
 
-config/redis.go
+> config/redis.go
 ```config/redis.go
 package config
 
@@ -171,7 +171,7 @@ func initRedis(){
 ```
 
 ## 2. 数据库表,字段-gorm 
-models/user.go
+> models/user.go
 ```models/user.go
 package models
 
@@ -185,7 +185,7 @@ type User struct{
 }
 ```
 
-models/article.go
+> models/article.go
 ```models/article.go
 package models
 
@@ -218,7 +218,7 @@ var(
 
 
 ## 4. 网站控制器-gin 
-controllers/article_controller.go
+> controllers/article_controller.go
 ```controllers/article_controller.go
 func GetArticles(ctx *gin.Context){
     // 声明一个名为 article 的变量,变量的类型是 models.Article。        
@@ -242,7 +242,7 @@ func GetArticles(ctx *gin.Context){
 }
 ```
 
-HTTP 状态码
+> HTTP 状态码
 ```controllers/test_controller.go
 
     // HTTP 状态码
@@ -288,7 +288,7 @@ HTTP 状态码
     ctx.JSON(http.StatusOK, article)
 ```
 
-controllers/db_controller.go
+> controllers/db_controller.go
 ```controllers/db_controller.go
 
     // mysql
@@ -313,7 +313,7 @@ controllers/db_controller.go
 ```
 
 ## 5. 自定义工具配置
-utils/utils.go
+> utils/utils.go
 ```utils/utils.go
 package utils
 
@@ -402,7 +402,7 @@ func ParseJWT(tokenString string) (string, error) {
 }
 ```
 
-bcrypt,jwt
+> bcrypt,jwt
 ```
 // 使用 bcrypt 将明文密码 pwd 进行哈希，工作因子（cost）为 12，返回哈希字节切片或错误。
 bcrypt.GenerateFromPassword([]byte(pwd), 12)
@@ -433,7 +433,7 @@ errors.New("unexpected Signing Method")
 ```
 
 ## 6. 网站路由-gin
-router/router.go
+> router/router.go
 ```router/router.go
 package router
 
@@ -447,7 +447,7 @@ import (
 )
 ```
 
-定义一个名为 SetupRouter 的函数，返回类型是 *gin.Engine（Gin 框架的路由引擎）
+> 定义一个名为 SetupRouter 的函数，返回类型是 *gin.Engine（Gin 框架的路由引擎）
 ```router/router.go
 func SetupRouter() *gin.Engine{
 
@@ -515,7 +515,7 @@ func SetupRouter() *gin.Engine{
 
 ## 7. 中间件-gin
 
-middlewares/auth_middleware.go
+> middlewares/auth_middleware.go
 ```middlewares/auth_middleware.go
 // AuthMiddleWare 返回一个 Gin 中间件处理函数
 func AuthMiddleWare() gin.HandlerFunc{
@@ -526,7 +526,7 @@ func AuthMiddleWare() gin.HandlerFunc{
 }
 ```
 
-HTTP 状态码
+> HTTP 状态码
 ```middlewares/auth_middleware.go
 
     // 从请求头获取 Authorization 值（通常是 Bearer token）

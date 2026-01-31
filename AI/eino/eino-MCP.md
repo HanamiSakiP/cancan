@@ -1,6 +1,8 @@
 # MCP install
-* [eino CREATE mcp-client,mcp-server](https://www.cloudwego.io/zh/docs/eino/ecosystem_integration/tool/tool_mcp/)
-* [eino CREATE mcp-tool And mcp-examples](https://github.com/cloudwego/eino-ext/blob/main/components/tool/mcp/examples/mcp.go)
+
+> * [eino CREATE mcp-client,mcp-server](https://www.cloudwego.io/zh/docs/eino/ecosystem_integration/tool/tool_mcp/)
+> * [eino CREATE mcp-tool And mcp-examples](https://github.com/cloudwego/eino-ext/blob/main/components/tool/mcp/examples/mcp.go)
+
 ```go
 // mcpTool_Config
 go get github.com/cloudwego/eino-ext/components/tool/mcp@latest
@@ -8,6 +10,7 @@ go get github.com/cloudwego/eino-ext/components/tool/mcp@latest
 go get github.com/mark3labs/mcp-go
 ```
 ## MCP
+
 ```go
 1. mcp_server
 ->  // 1. CREATE mcp_server
@@ -27,6 +30,7 @@ go get github.com/mark3labs/mcp-go
 ```
 
 ### mcp_server
+
 ```go
 // mcp_server\mcp_server.go
 package main
@@ -74,6 +78,7 @@ func WeatherToolHandler(ctx context.Context, request mcp.CallToolRequest) (*mcp.
 ```
 
 #### mcpServer_TOOL GET_API_DATA
+
 ```go
 // mcp_server\apiTool_GetWeatherData.go
 // API例子
@@ -128,6 +133,7 @@ func GetWeatherData(ctx context.Context, cityName string, daysStr string) (*Weat
 ```
 
 ### mcp_client
+
 ```go
 // ----------------------------------------
 // GET mcpServer_TOOL
@@ -172,6 +178,7 @@ func getMcpTools() ([]tool.BaseTool, error) {
 }
 ```
 #### mcp_client main
+
 ```go
 package main
 func main() {

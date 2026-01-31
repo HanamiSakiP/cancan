@@ -1,26 +1,10 @@
-tool
+> [navi](https://github.com/denisidoro/navi)
 
-```bash
-https://github.com/denisidoro/navi
-https://github.com/tmux/tmux
-https://github.com/voidint/g
-https://github.com/pyenv/pyenv
-https://github.com/nvm-sh/nvm
-```
-
-web
-```web
-前端  -> API层  -> Service层  -> Data Access 层  -> 数据库
-config utils controllers global router middlewares models
-```
-
-## 修复vlc打不开
-
-重置配置和插件缓存（持久修复）
-```bash
-vlc --reset-config
-vlc --reset-plugins-cache
-```
+> web
+> ```web
+> 前端  -> API层  -> Service层  -> Data Access 层  -> 数据库
+> config utils controllers global router middlewares models
+> ```
 
 ## g_com
 ```bash-g_go

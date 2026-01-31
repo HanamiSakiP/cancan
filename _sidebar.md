@@ -14,28 +14,27 @@
   * [10. eino_A2A](AI/eino/eino-A2A.md)
   * [10. eino-Tool](AI/eino/eino-Tool.md)
   * [11. eino-Document](AI/eino/eino-Document.md)
+  * [12. eino-编排](AI/eino/eino-编排.md)
 * bash
   * [1. tool](bash/debian.md)
-  * [2. fcitx5输入法部署教程](bash/fcitx5.md)
+  * [2. fcitx5 输入法](bash/fcitx5.md)
+  * [3. go AND pip](bash/go.md)
+  * [4. WebDAV](bash/webdav.md)
+  * [5. go-gin-grom](bash/go-2.md)
+  * [6. mysql-redis](bash/MariaDB.md)
 * docker
   * [01、debian及docker常用命令](docker/debian_docker.md)
   * [02、docker储存空间转移](docker/docker磁盘空间不足解决办法.md)
   * [03、docker compose命令](docker/docker%20compose命令.md)
   * [04、docker常用命令](docker/docker命令.md)
   * [05、docker入门配置](docker/docker入门.md)
-* debian工具推荐
+* vue example
   * [01、vue部署教程](debian/vue.md)
   * [02、vue基础篇](debian/vue-2.md)  
   * [03、vue组件篇](debian/vue-3.md)
   * [04、vue路由篇](debian/vue-4.md)
-  * [05、vue的ElementPlus 组件库](debian/vue-5.md)  
-  * [06、go部署教程](debian/go.md)  
-  * [07、go基础](debian/go-2.md)
-* 数据库db
-  * [01、mysql部署教程](db/MariaDB.md)
+  * [05、vue的ElementPlus 组件库](debian/vue-5.md)
 * tool
   * [01、gopass部署教程](tool/tool.md)
 * Android
   * [01、Android部署教程](android/SJ.md)
-* WebDAV
-  * [01、WebDAV部署教程](webdav/webdav.md)
