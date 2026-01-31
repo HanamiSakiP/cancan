@@ -87,6 +87,7 @@ ssh-keygen -t rsa -b 4096 -C "你的邮箱@example.com"
 cat ~/.ssh/id_rsa.pub
 
 # 复制到密钥后
+git init
 git remote add origin git@github.com:username/repository.git
 git add .
 git commit -m "Initial commit with all files"
@@ -105,9 +106,18 @@ git add .
 # 提交更改
 git commit -m "描述你的更改"
 # 推送更改到远程仓库
-git push origin master
+git push
 # 查看提交历史
 git log
+```
+
+```bash
+# 查看远程仓库名称 + 对应 URL
+git remote -v
+# 查看单个远程仓库的详细信息
+git remote show origin  # 替换 origin 为你的远程仓库简称
+# 
+git checkout commit_id --filename
 ```
 
 ## 1、新建仓库

@@ -1,4 +1,4 @@
-# tool
+tool
 
 ```bash
 https://github.com/denisidoro/navi
@@ -15,6 +15,7 @@ config utils controllers global router middlewares models
 ```
 
 ## 修复vlc打不开
+
 重置配置和插件缓存（持久修复）
 ```bash
 vlc --reset-config
@@ -46,6 +47,7 @@ export GOPROXY=镜像网站,direct
 export GO111MODULE=on  # 确保开启 Go Modules
 source ~/.bashrc  # 或 source ~/.zshrc
 ```
+
 
 ## go_tool
 ```bash

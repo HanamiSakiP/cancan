@@ -1,6 +1,21 @@
 <!-- _sidebar.md -->
 
  <!--注意括号里是相对路径-->
+* AI-adk
+  * [1. adk_agent](AI/adk_agent/adk_agnet.md)
+  * [2. adk_MAS](AI/adk_agent/adk-MAS.md)
+  * [3. adk_MCP](AI/adk_agent/adk-MCP.md)
+  * [4. adk_A2A](AI/adk_agent/adk-A2A.md)
+  * [5. adk_A2UI](AI/adk_agent/adk-A2UI.md)
+* AI-eino
+  * [6. eino_agent](AI/eino/eino-Agent.md)
+  * [7. eino_RAG](AI/eino/eino-RAG.md)
+  * [8. eino_MCP](AI/eino/eino-MCP.md)
+  * [10. eino_A2A](AI/eino/eino-A2A.md)
+  * [10. eino-Tool](AI/eino/eino-Tool.md)
+  * [11. eino-Document](AI/eino/eino-Document.md)
+* bash
+  * [1. tool](bash/debian.md)
 * docker
   * [01、debian及docker常用命令](docker/debian_docker.md)
   * [02、docker储存空间转移](docker/docker磁盘空间不足解决办法.md)
