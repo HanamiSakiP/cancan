@@ -1,12 +1,4 @@
 <!-- _coverpage.md -->
 
-# 温故而知新
-
-> 你所热爱的，就是你的生活。
-
- 简单、快速整理所学知识
-- 以及所需文件
-- 工具推荐
-
-
-[开始使用 Let Go](/README.md)
+> Crazy Thursday Vivo50
+[![](./img/M.jpg)](./README.md "Crazy Thursday Vivo50")

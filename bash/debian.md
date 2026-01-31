@@ -107,7 +107,7 @@ git push -u origin master
 # 查看当前状态
 git status
 # 添加更改
-# 添加所有更改
+# 添加所有更改到暂存区
 git add .
 # 添加特定文件
 # git add 文件名
@@ -117,6 +117,8 @@ git commit -m "描述你的更改"
 git push
 # 查看提交历史
 git log
+# 清空暂存区
+# git reset
 ```
 
 ## 修复vlc打不开

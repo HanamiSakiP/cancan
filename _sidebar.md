@@ -16,6 +16,7 @@
   * [11. eino-Document](AI/eino/eino-Document.md)
 * bash
   * [1. tool](bash/debian.md)
+  * [2. fcitx5输入法部署教程](bash/fcitx5.md)
 * docker
   * [01、debian及docker常用命令](docker/debian_docker.md)
   * [02、docker储存空间转移](docker/docker磁盘空间不足解决办法.md)
@@ -23,7 +24,6 @@
   * [04、docker常用命令](docker/docker命令.md)
   * [05、docker入门配置](docker/docker入门.md)
 * debian工具推荐
-  * [00、输入法fcitx5部署教程](debian/fcitx5.md)
   * [01、vue部署教程](debian/vue.md)
   * [02、vue基础篇](debian/vue-2.md)  
   * [03、vue组件篇](debian/vue-3.md)
