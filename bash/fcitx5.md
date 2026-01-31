@@ -42,5 +42,5 @@ dcp	"docker compose ps"
 ad	"adk run\n"
 ad	"adk web "
 ad	"adk api_server --a2a --port 9999 "
-gi	"git add . && git commit -m \" &\" && git push"
+gi	"git add . && git commit -m \" AI\" && git push"
 ```
