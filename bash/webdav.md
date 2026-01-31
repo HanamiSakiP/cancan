@@ -154,3 +154,6 @@ git push -u origin master
     > * 找到
      > *GitHub Pages* 下的 *Branch*  下面 *None*  改为 *master*    /root
     *  点Save保存
+```bash
+docsify serve docs/
+```
