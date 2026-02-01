@@ -1,9 +1,4 @@
 > [navi](https://github.com/denisidoro/navi)
-> * web
-> ```bash
-> 前端  -> API层  -> Service层  -> Data Access 层  -> 数据库
-> config utils controllers global router middlewares models
-> ```
 
 ## go
 > ```bash

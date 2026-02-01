@@ -1,89 +1,92 @@
-## tool
-```go
-main
-->  // 0. ctx
-/*
-type ToolInfo struct {
-    // 工具的唯一名称，用于清晰地表达其用途
-    Name string
-    // 用于告诉模型如何/何时/为什么使用这个工具
-    // 可以在描述中包含少量示例
-    Desc string
-    // 工具接受的参数定义
-    // 可以通过两种方式描述：
-    // 1. 使用 ParameterInfo：schema.NewParamsOneOfByParams(params)
-    // 2. 使用 OpenAPIV3：schema.NewParamsOneOfByOpenAPIV3(openAPIV3)
-    *ParamsOneOf
-}
-*/
-->  // 1. Info(ctx context.Context) (*schema.ToolInfo, error)
-->  // 2. InvokableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (string, error)
-->  // 2. StreamableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (*schema.StreamReader[string], error)
-main
-->  
-```
+> ## eino-tool
+> ```go
+> // main.go
+> /*
+> type ToolInfo struct {
+>     // 工具的唯一名称，用于清晰地表达其用途
+>     Name string
+>     // 用于告诉模型如何/何时/为什么使用这个工具
+>     // 可以在描述中包含少量示例
+>     Desc string
+>     // 工具接受的参数定义
+>     // 可以通过两种方式描述：
+>     // 1. 使用 ParameterInfo：schema.NewParamsOneOfByParams(params)
+>     // 2. 使用 OpenAPIV3：schema.NewParamsOneOfByOpenAPIV3(openAPIV3)
+>     *ParamsOneOf
+> }
+> */
+> 
+> /*
+> ->  // 0. ctx
+> ->  // 1. Info(ctx context.Context) (*schema.ToolInfo, error)
+> ->  // 2. InvokableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (string, error)
+> ->  // 2. StreamableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (*schema.StreamReader[string], error)
+> // 二选一
+> --->  // end. 调用设置好的工具
+> */
+> ```
 
-## 接口与结构体
-```go
-// 接口定义
-// Tool 组件提供了三个层次的接口：
-// 基础工具接口，提供工具信息
-type BaseTool interface {
-    Info(ctx context.Context) (*schema.ToolInfo, error)
-}
-
-// 可调用的工具接口，支持同步调用
-type InvokableTool interface {
-    BaseTool
-    InvokableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (string, error)
-}
-
-// 支持流式输出的工具接口
-type StreamableTool interface {
-    BaseTool
-    StreamableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (*schema.StreamReader[string], error)
-}
-/*
-Info 方法
-功能：获取工具的描述信息
-参数：
-ctx：上下文对象
-返回值：
-*schema.ToolInfo：工具的描述信息
-error：获取信息过程中的错误
-InvokableRun 方法
-功能：同步执行工具
-参数：
-ctx：上下文对象，用于传递请求级别的信息，同时也用于传递 Callback Manager
-argumentsInJSON：JSON 格式的参数字符串
-opts：工具执行的选项
-返回值：
-string：执行结果
-error：执行过程中的错误
-StreamableRun 方法
-功能：以流式方式执行工具
-参数：
-ctx：上下文对象，用于传递请求级别的信息，同时也用于传递 Callback Manager
-argumentsInJSON：JSON 格式的参数字符串
-opts：工具执行的选项
-返回值：
-*schema.StreamReader[string]：流式执行结果
-error：执行过程中的错误
-*/
-
-type ToolInfo struct {
-    // 工具的唯一名称，用于清晰地表达其用途
-    Name string
-    // 用于告诉模型如何/何时/为什么使用这个工具
-    // 可以在描述中包含少量示例
-    Desc string
-    // 工具接受的参数定义
-    // 可以通过两种方式描述：
-    // 1. 使用 ParameterInfo：schema.NewParamsOneOfByParams(params)
-    // 2. 使用 OpenAPIV3：schema.NewParamsOneOfByOpenAPIV3(openAPIV3)
-    *ParamsOneOf
-}
-```
+> ## struct AND interface
+> ```go
+> // 接口定义
+> // Tool 组件提供了三个层次的接口：
+> // 基础工具接口，提供工具信息
+> type BaseTool interface {
+>     Info(ctx context.Context) (*schema.ToolInfo, error)
+> }
+> 
+> // 可调用的工具接口，支持同步调用
+> type InvokableTool interface {
+>     BaseTool
+>     InvokableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (string, error)
+> }
+> 
+> // 支持流式输出的工具接口
+> type StreamableTool interface {
+>     BaseTool
+>     StreamableRun(ctx context.Context, argumentsInJSON string, opts ...Option) (*schema.StreamReader[string], error)
+> }
+> /*
+> Info 方法
+> 功能：获取工具的描述信息
+> 参数：
+> ctx：上下文对象
+> 返回值：
+> *schema.ToolInfo：工具的描述信息
+> error：获取信息过程中的错误
+> InvokableRun 方法
+> 功能：同步执行工具
+> 参数：
+> ctx：上下文对象，用于传递请求级别的信息，同时也用于传递 Callback Manager
+> argumentsInJSON：JSON 格式的参数字符串
+> opts：工具执行的选项
+> 返回值：
+> string：执行结果
+> error：执行过程中的错误
+> StreamableRun 方法
+> 功能：以流式方式执行工具
+> 参数：
+> ctx：上下文对象，用于传递请求级别的信息，同时也用于传递 Callback Manager
+> argumentsInJSON：JSON 格式的参数字符串
+> opts：工具执行的选项
+> 返回值：
+> *schema.StreamReader[string]：流式执行结果
+> error：执行过程中的错误
+> */
+> 
+> type ToolInfo struct {
+>     // 工具的唯一名称，用于清晰地表达其用途
+>     Name string
+>     // 用于告诉模型如何/何时/为什么使用这个工具
+>     // 可以在描述中包含少量示例
+>     Desc string
+>     // 工具接受的参数定义
+>     // 可以通过两种方式描述：
+>     // 1. 使用 ParameterInfo：schema.NewParamsOneOfByParams(params)
+>     // 2. 使用 OpenAPIV3：schema.NewParamsOneOfByOpenAPIV3(openAPIV3)
+>     *ParamsOneOf
+> }
+> ```
 
 ### func_tool
 ```go

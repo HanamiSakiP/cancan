@@ -1,6 +1,6 @@
 # go-gin-grom
 
-> ## 0. 基本代码
+> ## 0. 基础知识
 > test/test.go
 > ```go
 > # test.go
@@ -11,6 +11,33 @@
 > 
 > )
 > ```
+> ```bash
+> web 知识点
+> # 前端  -> API层  -> Service层  -> Data Access 层  -> 数据库
+> -> utils -> controllers
+> -> middlewares -> router 
+> -> models -> global-> config
+> # 项目结构
+> go-gin-grom/
+> ├── config/  # 配置项
+> │     └── config.go
+> │     └── config.yml
+> │     └── db.go
+> │     └── redis.go
+> └── models
+> │     └── user.go
+> └── global
+> │     └── global.go
+> └── controllers
+> │     └── test_controller.go
+> └── utils
+> │     └── utils.go
+> └── router
+> │     └── router.go
+> └── middlewares
+>     └───── auth_middleware.go
+> ```
+
 
 > ## 1. 基础配置（数据库连接）-gorm
 > config/config.go

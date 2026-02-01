@@ -58,16 +58,16 @@ var = "string"
     printf("err")
 """
 ```
-## 结构
-```bash
-a2a_basic/
-├── adk_agent_samples/
-│   └── mcp_client_agent/
-│   │    ├── __init__.py
-│   │    └── agent.py
-│   └── .env
-└── my_adk_mcp_server.py # 本地mcp_server
-```
+> ## 结构
+> ```bash
+> a2a_basic/
+> ├── adk_agent_samples/
+> │   └── mcp_client_agent/
+> │   │    ├── __init__.py
+> │   │    └── agent.py
+> │   └── .env
+> └── my_adk_mcp_server.py # 本地mcp_server
+> ```
 ## 0. package_py mcp_server
 ```py
 """ go-0. 导包

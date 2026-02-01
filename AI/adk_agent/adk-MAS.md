@@ -3,51 +3,51 @@
 > * LLM 智能体： 由大型语言模型驱动的智能体。(参见 LLM 智能体)
 > * 工作流智能体： 专门的智能体 (SequentialAgent、ParallelAgent、LoopAgent),旨在管理其子智能体的执行流程。(参见 工作流智能体)
 > * 自定义智能体： 你自己的智能体，继承自 BaseAgent,具有专门的非 LLM 逻辑。(参见 自定义智能体)
-```bash
-# LLM -> MAS -> MCP -> A2A -> A2UI
-# 组合模式
-# 1. 迭代优化模式 -> SequentialAgent评审/批评模式 
-# 2. 并行扇出/聚合模式 -> 评审/批评模式
-adk --version
-adk create 
-# 配置
-# adk create --type=config my_agent
-# cmd
-adk run 
-adk web
-adk api_server
-```
+> ```bash
+> # LLM -> MAS -> MCP -> A2A -> A2UI
+> # 组合模式
+> # 1. 迭代优化模式 -> SequentialAgent评审/批评模式 
+> # 2. 并行扇出/聚合模式 -> 评审/批评模式
+> adk --version
+> adk create 
+> # 配置
+> # adk create --type=config my_agent
+> # cmd
+> adk run 
+> adk web
+> adk api_server
+> ```
 
-### 1.1. 智能体层次结构 (父智能体、子智能体)
-```py
-# 概念示例：定义层次结构
-from google.adk.agents import LlmAgent, BaseAgent
-# 定义单个智能体
-greeter = LlmAgent(name="Greeter", model="gemini-2.0-flash")
-task_doer = BaseAgent(name="TaskExecutor") # 自定义非-LLM 智能体
-
-# 创建父智能体并通过 sub_agents 分配子智能体
-coordinator = LlmAgent(
-    name="Coordinator",
-    model="gemini-2.0-flash",
-    description="我负责协调问候和任务。",
-    sub_agents=[ # 在这里分配子智能体
-        greeter,
-        task_doer
-    ]
-)
-# 框架会自动设置：
-# assert greeter.parent_agent == coordinator
-# assert task_doer.parent_agent == coordinator
-```
+> ### 1.1. 智能体层次结构 (父智能体、子智能体)
+> ```py
+> # 概念示例：定义层次结构
+> from google.adk.agents import LlmAgent, BaseAgent
+> # 定义单个智能体
+> greeter = LlmAgent(name="Greeter", model="gemini-2.0-flash")
+> task_doer = BaseAgent(name="TaskExecutor") # 自定义非-LLM 智能体
+> 
+> # 创建父智能体并通过 sub_agents 分配子智能体
+> coordinator = LlmAgent(
+>     name="Coordinator",
+>     model="gemini-2.0-flash",
+>     description="我负责协调问候和任务。",
+>     sub_agents=[ # 在这里分配子智能体
+>         greeter,
+>         task_doer
+>     ]
+> )
+> # 框架会自动设置：
+> # assert greeter.parent_agent == coordinator
+> # assert task_doer.parent_agent == coordinator
+> ```
 > * 建立层次结构：父智能体时将智能体实例列表传递给 sub_agents 参数来创建树结构。ADK 会在初始化期间自动在每个子智能体上设置 parent_agent 属性。
 > * 单一父级规则：一个智能体实例只能作为子智能体添加一次。尝试分配第二个父级将导致 ValueError。
 > * 重要性： 此层次结构定义了工作流智能体的作用域，并影响 LLM 驱动委派的潜在目标。你可以使用 agent.parent_agent 导航层次结构，或使用 agent.find_agent(name) 查找后代。
 
-### 1.2. 作为编排器的工作流智能体
+> ### 1.2. 作为编排器的工作流智能体
 > ADK 包含从 BaseAgent 派生的专门智能体，它们自己不执行任务，而是编排其 sub_agents 的执行流程。
 
-#### 1.2.1 SequentialAgent
+> #### 1.2.1 SequentialAgent
 > * SequentialAgent: 按照列表顺序依次执行其 sub_agents。
 >   * 上下文： 顺序传递相同的 InvocationContext,允许智能体通过共享状态轻松传递结果。
 ```py
@@ -61,7 +61,7 @@ step2 = LlmAgent(name="Step2_Process", instruction="Process data from {data}.")
 pipeline = SequentialAgent(name="MyPipeline", sub_agents=[step1, step2])
 ```
 
-#### 1.2.2 ParallelAgent
+> #### 1.2.2 ParallelAgent
 > * ParallelAgent: 并行执行其 sub_agents。来自子智能体的事件可能会交错出现。
 >   * 上下文： 为每个子智能体修改 InvocationContext.branch(例如，ParentBranch.ChildName),提供一个不同的上下文路径，这在某些记忆实现中对隔离历史记录很有用。
 >   * 状态： 尽管分支不同，所有并行子智能体都访问相同的共享 session.state,使它们能够读取初始状态并写入结果 (使用不同的键以避免竞争条件)。
@@ -77,7 +77,7 @@ fetch_news = LlmAgent(name="NewsFetcher", output_key="news")
 gatherer = ParallelAgent(name="InfoGatherer", sub_agents=[fetch_weather, fetch_news])
 ```
 
-#### 1.2.3 LoopAgent
+> #### 1.2.3 LoopAgent
 > * LoopAgent: 在循环中顺序执行其 sub_agents。
 >   * 终止： 如果达到可选的 max_iterations,或者任何子智能体返回一个在其事件操作中设置了 escalate=True 的 Event,循环就会停止。
 >   * 上下文和状态： 在每次迭代中传递相同的 InvocationContext，允许状态变化 (例如，计数器、标志) 在循环中持久化。
@@ -106,10 +106,10 @@ poller = LoopAgent(
 )
 ```
 
-### 1.3. 交互与通信机制
+> ### 1.3. 交互与通信机制
 >  系统内的智能体通常需要相互交换数据或触发彼此的操作。ADK 通过以下方式实现这一点：
 
-#### 1.3.1. 共享会话状态 (session.state)
+> #### 1.3.1. 共享会话状态 (session.state)
 >  对于在同一调用内操作的智能体 (因此通过 InvocationContext 共享同一个 Session 对象) 来说，这是最基本的被动通信方式。
 > * 机制： 一个智能体 (或其工具/回调) 写入一个值 (context.state['data_key'] = processed_data),后续智能体读取它 (data = context.state.get('data_key'))。状态变化通过 CallbackContext 进行跟踪。
 > * 便利性： LlmAgent 上的 output_key 属性会自动将智能体的最终响应文本 (或结构化输出) 保存到指定的状态键。
@@ -126,7 +126,7 @@ agent_B = LlmAgent(name="AgentB", instruction="Tell me about the city stored in 
 pipeline = SequentialAgent(name="CityInfo", sub_agents=[agent_A, agent_B])
 ```
 
-#### 1.3.2. LLM 驱动委派 (智能体转移)
+> #### 1.3.2. LLM 驱动委派 (智能体转移)
 >  利用 LlmAgent 的理解能力动态地将任务路由到层次结构内的其他适合智能体。
 > * 机制： 智能体的 LLM 生成一个特定的函数调用：transfer_to_agent(agent_name='target_agent_name')。
 > * 处理： AutoFlow(当存在子智能体或未禁止转移时默认使用) 拦截此调用。它使用 root_agent.find_agent() 识别目标智能体，并更新 InvocationContext 以切换执行焦点。
@@ -151,7 +151,7 @@ coordinator = LlmAgent(
 )
 ```
 
-#### 1.3.3. 显式调用 (AgentTool)
+> #### 1.3.3. 显式调用 (AgentTool)
 > 允许 LlmAgent 将另一个 BaseAgent 实例视为可调用的函数或工具。
 > * 机制： 将目标智能体实例包装在 AgentTool 中，并将其包含在父 LlmAgent 的 tools 列表中。AgentTool 为 LLM 生成相应的函数声明。
 > * 处理： 当父 LLM 生成针对 AgentTool 的函数调用时，框架执行 AgentTool.run_async。此方法运行目标智能体，捕获其最终响应，将任何状态/工件变化转发回父上下文，并将响应作为工具的结果返回。
@@ -190,14 +190,14 @@ artist_agent = LlmAgent(
 # 生成的图片 Part 作为工具结果返回给 Artist agent。
 ```
 
-## 2. example 常见多智能体模式
+> ## 2. example 常见多智能体模式
 
-### 协调器/调度器模式
+> ### 协调器/调度器模式
 > * 结构： 一个中心 LlmAgent(协调器) 管理几个专门的 sub_agents。
 > * 目标： 将传入请求路由到适当的专家智能体。
 > * 使用的 ADK 原语：
-    * 层次结构： 协调器在 sub_agents 中列出专家。
-    * 交互： 主要使用 LLM 驱动委派(需要在子智能体上有清晰的 description 并在协调器上有适当的 instruction) 或 显式调用 (AgentTool)(协调器在其 tools 中包含用 AgentTool 包装的专家)。
+>     * 层次结构： 协调器在 sub_agents 中列出专家。
+>     * 交互： 主要使用 LLM 驱动委派(需要在子智能体上有清晰的 description 并在协调器上有适当的 instruction) 或 显式调用 (AgentTool)(协调器在其 tools 中包含用 AgentTool 包装的专家)。
 ```py
 # 概念代码:使用 LLM 转移的协调器
 from google.adk.agents import LlmAgent
@@ -216,7 +216,7 @@ coordinator = LlmAgent(
 )
 ```
 
-### 顺序流水线模式
+> ### 顺序流水线模式
 > * 结构： 一个 SequentialAgent 包含按固定顺序执行的 sub_agents。
 > * 目标： 实现多步骤过程，其中一个步骤的输出输入到下一个步骤。
 > * 使用的 ADK 原语：
@@ -256,7 +256,7 @@ dataPipeline, _ := sequentialagent.New(sequentialagent.Config{
 })
 ```
 
-### 2.1 SequentialAgent 评审/批评模式 (生成器 - 批评者)
+> ### 2.1 SequentialAgent 评审/批评模式 (生成器 - 批评者)
 > * 结构： 通常涉及 SequentialAgent 中的两个智能体：一个生成器和一个批评者/评审者。
 > * 目标： 通过让专门的智能体评审生成的输出来提高其质量或有效性。
 > * 使用的 ADK 原语：
@@ -310,7 +310,7 @@ reviewPipeline, _ := sequentialagent.New(sequentialagent.Config{
 // reviewer runs -> reads state["draft_text"], saves status to state["review_status"]
 ```
 
-### 2.2 LoopAgent 迭代优化模式
+> ### 2.2 LoopAgent 迭代优化模式
 > * 结构： 使用一个 LoopAgent,其中包含一个或多个在多次迭代中处理任务的智能体。
 > * 目标： 逐步改进存储在会话状态中的结果 (例如，代码、文本、计划),直到达到质量阈值或达到最大迭代次数。
 > * 使用的 ADK 原语：
@@ -393,7 +393,7 @@ refinementLoop, _ := loopagent.New(loopagent.Config{
 })
 ```
 
-### 2.3 ParallelAgent to SequentialAgent 并行扇出/聚合模式
+> ### 2.3 ParallelAgent to SequentialAgent 并行扇出/聚合模式
 > * 结构： 一个 ParallelAgent 并发运行多个 sub_agents,通常后面跟着一个后续智能体 (在 SequentialAgent 中) 来聚合结果。
 > * 目标： 同时执行独立任务以减少延迟，然后组合它们的输出。
 > * 使用的 ADK 原语：
@@ -442,7 +442,7 @@ overallWorkflow, _ := sequentialagent.New(sequentialagent.Config{
 })
 ```
 
-### 2.3 人机协作模式
+> ### 2.3 人机协作模式
 > * 结构： 在智能体工作流中集成人类干预点。
 > * 目标： 允许人类监督、审批、纠正或执行 AI 无法完成的任务。
 > 使用的 ADK 原语 (概念):
