@@ -37,4 +37,4 @@
 * tool
   * [01、gopass部署教程](tool/tool.md)
 * Android
-  * [01、Android部署教程](android/SJ.md)
+  * [01、Android部署教程](android/and.md)
